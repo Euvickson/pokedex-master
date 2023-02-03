@@ -1,5 +1,4 @@
 const ul = document.querySelector('[data-js="pokedex"]')
-console.log(ul)
 
 async function fetchPokemon () {
     const getPokemonUrl = id => `https://pokeapi.co/api/v2/pokemon/${id}`;
@@ -8,11 +7,11 @@ async function fetchPokemon () {
 
     for(let i = 1; i <= 151; i++) {
         const pokemon = await (await fetch(getPokemonUrl(i))).json();
-        pokemonList.push(pokemon)
+        pokemonList.push(pokemon);
     }
 
     const lisPokemons = pokemonList.reduce((acumulator, pokemon) => {
-        const types = pokemon.types.map(typeInfo => typeInfo.type.name)
+        const types = pokemon.types.map(typeInfo => typeInfo.type.name);
 
         acumulator += `
         <li class="card ${types[0]}">
@@ -21,11 +20,10 @@ async function fetchPokemon () {
             <p class="card-subtitle">${types.join(' | ')}</p>
         </li>
         `
-        return acumulator
-    }, '')
+        return acumulator;
+    }, '');
 
-    ul.innerHTML = lisPokemons
-    console.log(lisPokemons)
+    ul.innerHTML = lisPokemons;
 }
 
 fetchPokemon();
