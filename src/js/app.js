@@ -4,14 +4,18 @@ const pokemonList = [];
 
 async function fetchPokemon () {
 
-    for(let i = 1; i <= 151; i++) {
+    for(let i = 1; i <= 1008; i++) {
         const pokemon = await (await fetch(getPokemonUrl(i))).json();
-        pokemonList.push(pokemon);
+
+        if(i <= 151) {
+            pokemonList.push(pokemon);
+            const lisPokemons = generatePokemonHtml(pokemonList);        
+            ul.innerHTML = lisPokemons;
+        } else {
+            pokemonList.push(pokemon);
+        }
     }
 
-    const lisPokemons = generatePokemonHtml(pokemonList);
-
-    ul.innerHTML = lisPokemons;
 }
 
 function generatePokemonHtml () {
