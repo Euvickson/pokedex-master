@@ -15,14 +15,14 @@ async function fetchPokemon () {
 }
 
 function generatePokemonHtml () {
-    const lisPokemons = pokemonList.reduce((acumulator, pokemon) => {
-        const types = pokemon.types.map(typeInfo => typeInfo.type.name);
+    const lisPokemons = pokemonList.reduce((acumulator, { name, id, types }) => {
+        const typesList = types.map(typeInfo => typeInfo.type.name);
 
         acumulator += `
-        <li class="card ${types[0]}">
-            <img class="card-image" alt="${pokemon.name}" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png"/>
-            <h2 class="card-title">${pokemon.id} ${pokemon.name}</h2>
-            <p class="card-subtitle">${types.join(' | ')}</p>
+        <li class="card ${typesList[0]}">
+            <img class="card-image" alt="${name}" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png"/>
+            <h2 class="card-title">${id} ${name}</h2>
+            <p class="card-subtitle">${typesList.join(' | ')}</p>
         </li>
         `
         return acumulator;
