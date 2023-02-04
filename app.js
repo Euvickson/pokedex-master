@@ -1,15 +1,20 @@
 const ul = document.querySelector('[data-js="pokedex"]')
+const getPokemonUrl = id => `https://pokeapi.co/api/v2/pokemon/${id}`;
+const pokemonList = [];
 
 async function fetchPokemon () {
-    const getPokemonUrl = id => `https://pokeapi.co/api/v2/pokemon/${id}`;
-
-    const pokemonList = [];
 
     for(let i = 1; i <= 151; i++) {
         const pokemon = await (await fetch(getPokemonUrl(i))).json();
         pokemonList.push(pokemon);
     }
 
+    const lisPokemons = generatePokemonHtml(pokemonList);
+
+    ul.innerHTML = lisPokemons;
+}
+
+function generatePokemonHtml () {
     const lisPokemons = pokemonList.reduce((acumulator, pokemon) => {
         const types = pokemon.types.map(typeInfo => typeInfo.type.name);
 
@@ -22,8 +27,7 @@ async function fetchPokemon () {
         `
         return acumulator;
     }, '');
-
-    ul.innerHTML = lisPokemons;
+    return lisPokemons;
 }
 
 fetchPokemon();
