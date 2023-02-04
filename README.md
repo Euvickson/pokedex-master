@@ -1,4 +1,4 @@
-# pokedex-master
+# Pokedex Master
 
 ![image](https://user-images.githubusercontent.com/89767748/216767889-1f904ad6-d085-4640-a34f-d3a04888123e.png)
 
