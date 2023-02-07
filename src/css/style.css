@@ -16,6 +16,26 @@ h1 {
 	font-size: 54px;
 }
 
+.list {
+	justify-content: space-around;
+	list-style: none;
+	display: flex;
+	gap: 16px;
+}
+
+.list__item-button {
+	background: linear-gradient(to right, rgb(250, 110, 75), rgba(49, 52, 223, 0.637));
+	border: none;
+	padding: 10px 20px;
+	border-radius: 20px;
+	transition: .5s;
+}
+
+.list__item-button:hover {
+	scale: 120%;
+	cursor: pointer;
+}
+
 .pokedex {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -110,7 +130,7 @@ h1 {
 }
 
 .ghost {
-	background-color: #cb61da;
+	background-color: #c581ce;
 }
 
 .card:hover {

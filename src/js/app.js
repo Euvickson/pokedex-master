@@ -2,6 +2,12 @@ const ul = document.querySelector('[data-js="pokedex"]')
 const getPokemonUrl = id => `https://pokeapi.co/api/v2/pokemon/${id}`;
 const pokemonList = [];
 
+const botaoPrimeiraGeracao = document.querySelector('[data-button="1"]');
+
+botaoPrimeiraGeracao.addEventListener("click", () => {
+    console.log("Estou aqui")
+})
+
 async function fetchPokemon () {
 
     for(let i = 1; i <= 1008; i++) {
