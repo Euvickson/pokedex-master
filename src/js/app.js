@@ -1,25 +1,31 @@
 const ul = document.querySelector('[data-js="pokedex"]')
 const getPokemonUrl = id => `https://pokeapi.co/api/v2/pokemon/${id}`;
 const pokemonList = [];
+let value = 0;
+const buttons = document.querySelectorAll('[data-button]');
 
-const botaoPrimeiraGeracao = document.querySelector('[data-button="1"]');
-
-botaoPrimeiraGeracao.addEventListener("click", () => {
-    console.log("Estou aqui")
+buttons.forEach(button => {
+    button.addEventListener("click", () => {
+        const previousGenerationValue = button.dataset.gen - 1;
+        const dataSetValue = parseInt(button.dataset.button);
+        if(previousGenerationValue == 0) {
+            const dataSetValue = parseInt(button.dataset.button);
+            fetchPokemon(0, dataSetValue);
+        } else {
+            const previousButtonGenerationValue = document.querySelector(`[data-gen="${previousGenerationValue}"]`);
+            const previousGenDataValue = parseInt(previousButtonGenerationValue.dataset.button);
+            fetchPokemon(previousGenDataValue, dataSetValue);
+        }
+        value = dataSetValue
+    })
 })
 
-async function fetchPokemon () {
-
-    for(let i = 1; i <= 1008; i++) {
+async function fetchPokemon (previousGenDataValue, dataSetValue) {
+    for(let i = previousGenDataValue + 1; i <= dataSetValue; i++) {        
         const pokemon = await (await fetch(getPokemonUrl(i))).json();
-
-        if(i <= 151) {
             pokemonList.push(pokemon);
             const lisPokemons = generatePokemonHtml(pokemonList);        
-            ul.innerHTML = lisPokemons;
-        } else {
-            pokemonList.push(pokemon);
-        }
+            ul.innerHTML = lisPokemons;    
     }
 
 }
@@ -40,5 +46,5 @@ function generatePokemonHtml () {
     return lisPokemons;
 }
 
-fetchPokemon();
+fetchPokemon(0, 20);
 
